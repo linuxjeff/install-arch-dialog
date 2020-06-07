@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export LANG=pt_BR.UTF-8
+
+LMSG1="Configuração do teclado"
+
+LMSG2="Escolha o layout do Teclado"

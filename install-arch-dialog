@@ -27,3 +27,21 @@
 # Agradecimentos:
 #
 # ---------------------------------------------------------------------------------- #
+
+# Primeira tela do instalador
+lidioma=$(dialog --stdout                   \
+	    --title "Instalador Arch Linux" \
+	    --menu "Escolha a lingua"       \
+	    10 45 0                         \
+	    pt-br "Brasil"                  )
+
+source pt-br
+
+dlayout=$(dialog --stdout \
+	--title "$LMSG1" \
+	--menu "$LMSG2" \
+	0 0 0 \
+	br-abnt2 'Portugues BR' \
+	us 'English'            )
+
+
