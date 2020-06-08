@@ -2,6 +2,32 @@
 
 export LANG=pt_BR.UTF-8
 
+# Janela do mapa do teclado
 LMSG1="Configuração do teclado"
 
-LMSG2="Escolha o layout do Teclado"
+# Janela do mapa do teclado
+LMSG2="Escolha o mapa do Teclado"
+
+# Janela do mapa do teclado
+LMSG7="Portugues BR"
+
+# Janela do mapa do teclado
+LMSG8="English US"
+
+# Janela de localização do sistema
+LMSG3="Localização"
+
+# Janela de localização do sistema
+LMSG4="Qual seu país"
+
+# Janela de localização do sistema
+LMSG5="Brasil"
+
+# Janela de localização do sistema
+LMSG6="EUA"
+
+# Janela de timezone
+LMSG9="Configuração de Timezone"
+
+# Janela de timezone
+LMSG10="Escolha sua Timezone"

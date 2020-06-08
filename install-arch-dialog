@@ -31,17 +31,60 @@
 # Primeira tela do instalador
 lidioma=$(dialog --stdout                   \
 	    --title "Instalador Arch Linux" \
-	    --menu "Escolha a lingua"       \
+	    --menu "Escolha o idioma do instalador"       \
 	    10 45 0                         \
 	    pt-br "Brasil"                  )
 
 source pt-br
 
+# Janela do mapa do teclado
 dlayout=$(dialog --stdout \
 	--title "$LMSG1" \
 	--menu "$LMSG2" \
 	0 0 0 \
-	br-abnt2 'Portugues BR' \
-	us 'English'            )
+	br-abnt2 "$LMSG7" \
+	us "$LMSG8"            )
 
+loadkeys $dlayout
 
+dlocale=$(dialog --stdout \
+	--title "$LMSG3" \
+	--menu "$LMSG4" \
+	0 0 0 \
+	pt_BR.UTF-8 "$LMSG5" \
+	en_US.UTF-8 "$LMSG6")
+
+dtime=$(dialog --stdout \
+	--title "$LMSG9" \
+	--menu "$LMSG10" \
+	0 0 10 \
+	$(ls /usr/share/zoneinfo/ | sed 's/$/ o/'))
+
+if  test -d /usr/share/zoneinfo/"$dtime"
+	then
+	dtime2=$(dialog --stdout \
+		--title "$LMSG9" \
+		--menu "$LMSG10" \
+		0 0 10 \
+		$(ls /usr/share/zoneinfo/"$dtime" | sed 's/$/ o/'))
+	else
+	ln -sf /usr/share/zoneinfo/"$dtime" /etc/localtime
+	timedatectl set-ntp true
+	dlocaltime=$(/usr/share/zoneinfo/"$dtime")
+
+fi
+
+if  test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"
+	then
+		dtime3=$(dialog --stdout \
+			--title "$LMSG9" \
+			--menu "$LMSG10" \
+			0 0 10 \
+			$(ls /usr/share/zoneinfo/"$dtime"/"$dtime2" | sed 's/$/ o/'))
+	else
+		ln -sf /usr/share/zoneinfo/"$dtime"/"$dtime2" /etc/localtime
+		timedatectl set-ntp true
+	        dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2")
+fi
+
+clear ; echo "/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"" ; echo "$dlocaltime"
