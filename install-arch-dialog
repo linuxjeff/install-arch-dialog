@@ -54,53 +54,42 @@ dlocale=$(dialog --stdout \
 	pt_BR.UTF-8 "$LMSG5" \
 	en_US.UTF-8 "$LMSG6")
 
-dtime=$(dialog --stdout \
-	--title "$LMSG9" \
-	--menu "$LMSG10" \
-	0 0 10 \
-	$(ls /usr/share/zoneinfo/ | sed 's/$/ o/'))
-
-if  test -d /usr/share/zoneinfo/"$dtime"
-	then
-	dtime2=$(dialog --stdout \
-		--title "$LMSG9" \
-		--menu "$LMSG10" \
-		0 0 10 \
-		$(ls /usr/share/zoneinfo/"$dtime" | sed 's/$/ o/'))
-	else
-	ln -sf /usr/share/zoneinfo/"$dtime" /etc/localtime
-	timedatectl set-ntp true
-	dlocaltime=$(/usr/share/zoneinfo/"$dtime")
-
-fi
-
-if  test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"
-	then
-		dtime3=$(dialog --stdout \
+dlocaltime=$(
+	dtime=$(
+		dialog --stdout \
 			--title "$LMSG9" \
 			--menu "$LMSG10" \
 			0 0 10 \
-			$(ls /usr/share/zoneinfo/"$dtime"/"$dtime2" | sed 's/$/ o/'))
-	else
-		ln -sf /usr/share/zoneinfo/"$dtime"/"$dtime2" /etc/localtime
-		timedatectl set-ntp true
-	        dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2")
-fi
+			$(ls /usr/share/zoneinfo/ | sed 's/$/ o/'))
 
-if test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"
-	then
-		dtime4=$(dialod --stdout \
-			--title "$LMSG9" \
-			--menu "$LMSG10" \
-			0 0 10 \
-			$(ls /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3" | sed 's/$/ o/'))
-	else
-		ln -sf /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3" /etc/localtime
-		timedatectl set-ntp true
-	        dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3")
+		if test -d /usr/share/zoneinfo/"$dtime"
+       			then
+				dtime2=$(dialog \
+					--stdout \
+					--title "$LMSG9" \
+					--menu "$LMSG10" \
+					0 0 10 \
+					$(ls /usr/share/zoneinfo/"$dtime" | sed 's/$/ o/'))
+				
+				if test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"
+					then
+						dtime3=$(dialog \
+							--stdout \
+							--title "$LMSG9" \
+							--menu "$LMSG10" \
+							0 0 10 \
+							$(ls /usr/share/zoneinfo/"$dtime"/"$dtime2" | sed 's/$/ o/'))
+						echo "/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3""
+					else
+						echo "/usr/share/zoneinfo/"$dtime"/"$dtime2""
 
-fi
+					
+				fi
+			else
+				echo "/usr/share/zoneinfo/"$dtime""
 
-dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"/"$dtime4")
+		
+		fi
+)
 
-clear ; echo "$dlocaltime"
+echo "$dlocaltime"
