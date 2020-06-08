@@ -87,4 +87,20 @@ if  test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"
 	        dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2")
 fi
 
-clear ; echo "/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"" ; echo "$dlocaltime"
+if test -d /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"
+	then
+		dtime4=$(dialod --stdout \
+			--title "$LMSG9" \
+			--menu "$LMSG10" \
+			0 0 10 \
+			$(ls /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3" | sed 's/$/ o/'))
+	else
+		ln -sf /usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3" /etc/localtime
+		timedatectl set-ntp true
+	        dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3")
+
+fi
+
+dlocaltime=$(/usr/share/zoneinfo/"$dtime"/"$dtime2"/"$dtime3"/"$dtime4")
+
+clear ; echo "$dlocaltime"
