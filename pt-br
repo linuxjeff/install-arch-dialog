@@ -9,22 +9,22 @@ LMSG1="Configuração do teclado"
 LMSG2="Escolha o mapa do Teclado"
 
 # Janela do mapa do teclado
-LMSG7="Portugues BR"
+LMSG3="Portugues BR"
 
 # Janela do mapa do teclado
-LMSG8="English US"
+LMSG4="English US"
 
 # Janela de localização do sistema
-LMSG3="Localização"
+LMSG5="Localização"
 
 # Janela de localização do sistema
-LMSG4="Qual seu país"
+LMSG6="Qual seu país"
 
 # Janela de localização do sistema
-LMSG5="Brasil"
+LMSG7="Brasil"
 
 # Janela de localização do sistema
-LMSG6="EUA"
+LMSG8="EUA"
 
 # Janela de timezone
 LMSG9="Configuração de Timezone"
