@@ -80,6 +80,7 @@ while : ; do
 		loadkeys "$dkeymap"
 		dtimezone=$(tz1=$(dialog \
 			--stdout \
+			--nocancel \
 			--title "$LMSG9" \
 			--menu "$LMSG10" \
 			0 0 10 \
@@ -88,6 +89,7 @@ while : ; do
 				then
 		        	tz2=$(dialog \
 					--stdout \
+					--nocancel \
 					--title "$LMSG9" \
 					--menu "$LMSG10" \
 					0 0 10 \
@@ -96,6 +98,7 @@ while : ; do
 						then
 						tz3=$(dialog \
 							--stdout \
+							--nocancel \
 							--title "$LMSG9" \
 							--menu "$LMSG10" \
 							0 0 10 \
@@ -104,6 +107,7 @@ while : ; do
 								then
 								tz4=$(dialog \
 									--stdout \
+									--nocancel \
 									--title "$LMSG9" \
 									--menu "$LMSG10" \
 									0 0 10 \
@@ -138,4 +142,4 @@ while : ; do
 
 done
 
-reset ; echo "$dkeymap"
+reset ; echo "$dtimezone" > ~/ajk
