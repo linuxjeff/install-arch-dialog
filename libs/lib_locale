@@ -1,6 +1,7 @@
-#!/usr/bin/env Bash
+#!/usr/bin/env bash
 
-didioma () {
-	
-{
+fuidioma () {
+
+	ddioma=$(dialog --stdout --nocancel --ok-label "$ok" --title "$selidioma" --menu "$escidioma" 0 0 10 pt-br "Potuguẽs BR" )	
+}
 

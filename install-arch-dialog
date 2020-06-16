@@ -28,118 +28,12 @@
 #
 # ---------------------------------------------------------------------------------- #
 
-proxima=primeira
+. libs/*
+. language/*
 
-# loop principal
-while : ; do
+installarch () {
 
-    case "$proxima" in
-	primeira)
-                proxima=didioma
-                dialog \
-			--backtitle 'Instalador do Arch Linux' \
-			--msgbox 'Bem-vindo ao instalador do Arch Linux!' \
-			0 0
-            ;;
-         didioma)
-		 anterior=primeira
-		 proxima=dkeymap
-		 didioma=$(dialog \
-			--stdout \
-			--title "Instalador do Arch Linux" \
-			--menu "Escolha o idioma" \
-			0 0 10 \
-			pt-br "Portugues BR")
-		source "$didioma"
-            ;;
-         dkeymap)
-		 anterior=didioma
-		 proxima=dlocale
-		 dkeymap=$(dialog \
-			 --stdout \
-			 --title "$LMSG1" \
-			 --menu "$LMSG2" \
-			 0 0 10 \
-			 br-abnt2 "$LMSG3" \
-			 us "$LMSG4")
-            ;;
-         dlocale)
-		 anterior=dkeymap
-		 proxima=dtimezone
-		 dlocale=$(dialog \
-			 --stdout \
-			 --title "$LMSG5" \
-			 --menu "$LMSG6" \
-			 0 0 10 \
-			 pt_BR.UTF-8 "$LMSG7" \
-			 en_US.UTF-8 "$LMSG8")
-            ;;
-       dtimezone)
-	        anterior=dlocale
-		proxima=
-		loadkeys "$dkeymap"
-		dtimezone=$(tz1=$(dialog \
-			--stdout \
-			--nocancel \
-			--title "$LMSG9" \
-			--menu "$LMSG10" \
-			0 0 10 \
-			$(ls /usr/share/zoneinfo/ | sed 's/$/ o/'))
-		        if test -d /usr/share/zoneinfo/"$tz1"
-				then
-		        	tz2=$(dialog \
-					--stdout \
-					--nocancel \
-					--title "$LMSG9" \
-					--menu "$LMSG10" \
-					0 0 10 \
-					$(ls /usr/share/zoneinfo/"$tz1" | sed 's/$/ o/'))
-				        if test -d /usr/share/zoneinfo/"$tz1"/"$tz2"
-						then
-						tz3=$(dialog \
-							--stdout \
-							--nocancel \
-							--title "$LMSG9" \
-							--menu "$LMSG10" \
-							0 0 10 \
-							$(ls /usr/share/zoneinfo/"$tz1"/"$tz2" | sed 's/$/ o/'))
-						        if test -d /usr/share/zoneinfo/"$tz1"/"$tz2"/"$tz3"
-								then
-								tz4=$(dialog \
-									--stdout \
-									--nocancel \
-									--title "$LMSG9" \
-									--menu "$LMSG10" \
-									0 0 10 \
-									$(ls /usr/share/zoneinfo/"$tz1"/"$tz2"/"$tz3" | sed 's/$/ o/'))
-							                echo "/usr/share/zoneinfo/"$tz1"/"$tz2"/"$tz3"/"$tz4""	
-								else
-							        echo "/usr/share/zoneinfo/"$tz1"/"$tz2"/"$tz3""	
-						        fi
-						else
-						echo "/usr/share/zoneinfo/"$tz1"/"$tz2""
-				        fi
-				else
-					echo "/usr/share/zoneinfo/"$tz1""
-		        fi
-	                   )
-            ;;
-        final)
-            break
-            ;;
-        *)
-            echo "Janela desconhecida '$proxima'."
-            echo Abortando programa...
-            exit
-    esac
+	fuidioma
+}
 
-    # Aqui é feito o tratamento genérico de Código de Retorno
-    # de todas as telas. Volta para a tela anterior se for
-    # CANCELAR, sai do programa se for ESC.
-    retorno=$?
-    [ $retorno -eq 1   ] && proxima=$anterior   # cancelar
-    [ $retorno -eq 255 ] && break               # Esc
-
-done
-
-reset ; echo "$dtimezone" > ~/ajk
+installarch

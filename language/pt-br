@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+export LANG=pt_BR.UTF-8
+
+# Dialogo do botão OK das caixas do Dialog
+ok="Pronto!"
+
+# Dialogo do botão cancelar das caixas do Dialog
+cancel="Voltar"
+
+# Titulo da caixa de seleção de Idioma
+selidioma="Idiomas"
+
+# Tutulo do menu da caixa de seleção de idioma
+escidioma="Escolha o seu idioma"
