@@ -59,8 +59,14 @@ while : ; do
 			;;
               fuzoneinfo)
 		        anterior='fulayout'
-			proxima=''
+			proxima='teste'
 			fuzoneinfo
+			;;
+                        teste)
+			anterior='fuzoneinfo'
+			proximo=''
+			teste=$(dialog --stdout --title "teste" --msgbox "Testando" 0 0 )
+			break
 			;;
 		   final)
 			;;

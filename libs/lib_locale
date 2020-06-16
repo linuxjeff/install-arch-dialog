@@ -26,8 +26,6 @@ fulayout () {
 
 fuzoneinfo () {
 
-	while (true)
-	do
 	dzoneinfo=$(dialog \
 		--stdout \
 		--cancel-label "$cancel" \
@@ -36,6 +34,20 @@ fuzoneinfo () {
 		--menu "$seczone" \
 		0 0 10 \
 		$zonelist)
-	break
-	done
+	if (find /usr/share/zoneinfo -maxdepth 1 -type d | sed -n -e 's!^.*/!!p' | grep "$dzoneinfo" &> /dev/null); then
+		sublist=$(find /usr/share/zoneinfo/"$dzoneinfo" -maxdepth 1 | sed -n -e 's!^.*/!!p' | sort | sed 's/$/ -/g' | grep -v "$dzoneinfo")
+		dsubzoneinfo=$(dialog --stdout --ok-label "$ok" --cancel-label "$cancel" --title "$selzone" --menu "$seczone" 0 0 10 $sublist)
+		if [[ "$?" -eq "0" ]]; then
+			if (find /usr/share/zoneinfo/"$dzoneinfo" -maxdepth 1 -type  d | sed -n -e 's!^.*/!!p' | grep "$dsubzoneinfo" &> /dev/null); then
+			sublist=$(find /usr/share/zoneinfo/"$dzoneinfo"/"$dsubzoneinfo" -maxdepth 1 | sed -n -e 's!^.*/!!p' | sort | sed 's/$/ -/g' | grep -v "$dsubzoneinfo")
+                    dnsubzone=$(dialog --stdout --ok-label "$ok" --cancel-label "$cancel" --title "$selzone" --menu "$seczone" 0 0 10 $sublist)
+                    if [ "$?" -eq "0" ]; then
+                        dzoneinfo="${dzoneinfo}/${dsubzoneinfo}/${dnsubzone}"
+                    fi	
+		else
+			dzoneinfo="${dzoneinfo}/${dsubzoneinfo}"
+				
+			fi
+		fi
+	fi
 }
