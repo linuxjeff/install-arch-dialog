@@ -33,7 +33,11 @@
 
 installarch () {
 
-	fuidioma
+	#fuidioma
+	fulayout
 }
 
 installarch
+
+echo "$didioma"
+echo "$teclayout"

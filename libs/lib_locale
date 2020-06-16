@@ -2,6 +2,24 @@
 
 fuidioma () {
 
-	ddioma=$(dialog --stdout --nocancel --ok-label "$ok" --title "$selidioma" --menu "$escidioma" 0 0 10 pt-br "Potuguẽs BR" )	
+	didioma=$(dialog \
+		--stdout \
+		--nocancel \
+		--ok-label "$ok" \
+		--title "$selidioma" \
+		--menu "$escidioma" \
+		0 0 10 \
+		pt-br "Potuguẽs BR" )	
+	source language/"$didioma"
 }
 
+fulayout () {
+
+	teclayout=$(dialog \
+		--stdout \
+		--cancel-label "$cancel" \
+		--ok-label "$ok" \
+		--title "$sellayout" \
+		--menu "$seclayout" 0 0 10 br "Brasil")
+	localectl set-keymap br
+}

@@ -2,14 +2,20 @@
 
 export LANG=pt_BR.UTF-8
 
-# Dialogo do botão OK das caixas do Dialog
+# Dialogo do botão OK das caixas do Dialog.
 ok="Pronto!"
 
-# Dialogo do botão cancelar das caixas do Dialog
+# Dialogo do botão cancelar das caixas do Dialog.
 cancel="Voltar"
 
-# Titulo da caixa de seleção de Idioma
+# Titulo da caixa de seleção de Idioma.
 selidioma="Idiomas"
 
-# Tutulo do menu da caixa de seleção de idioma
+# Titulo do menu da caixa de seleção de idioma.
 escidioma="Escolha o seu idioma"
+
+# Titulo da tela de seleção de layout de teclado.
+sellayout="Layout de teclado"
+
+# Titulo do menu da escolha do teclado.
+seclayout="Escolha seu layout de teclado"
