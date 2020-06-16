@@ -30,14 +30,59 @@
 
 . libs/*
 . language/*
+. etc/install-arch-dialog.config
 
 installarch () {
+proxima='primeira'
 
-	#fuidioma
-	fulayout
+# loop principal
+while : ; do
+
+	# Aqui � identificada qual tela deve ser mostrada.
+	# Em cada tela s�o definidas as vari�veis 'anterior'
+	# e 'proxima' # que definem os rumos da navega��o.
+	case "$proxima" in
+		primeira)
+			proxima='fuidioma'
+			dialog --title "$msginstallarch" \
+				--msgbox "$msginstall" 0 0
+			;;
+	        fuidioma)
+			anterior='primeira'
+			proxima='fulayout'
+			fuidioma
+			;;
+                fulayout)
+			anterior='fuidioma'
+			proxima='fuzoneinfo'
+			fulayout
+			;;
+              fuzoneinfo)
+		        anterior='fulayout'
+			proxima=''
+			fuzoneinfo
+			;;
+		   final)
+			;;
+		*)
+			echo "Janela desconhecida '$proxima'."
+			echo "Abortando programa..."
+			exit
+	esac
+
+	# Aqui � feito o tratamento gen�rico de C�digo de Retorno
+	# de todas as telas. Volta para a tela anterior se for
+	# CANCELAR, sai do programa se for ESC.
+	retorno=$?
+	[ $retorno -eq 1   ] && proxima="$anterior"   # cancelar
+	[ $retorno -eq 255 ] && break                 # Esc
+
+done
+
 }
 
 installarch
 
 echo "$didioma"
 echo "$teclayout"
+echo "$dzoneinfo"

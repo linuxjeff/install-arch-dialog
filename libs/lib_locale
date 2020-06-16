@@ -21,5 +21,21 @@ fulayout () {
 		--ok-label "$ok" \
 		--title "$sellayout" \
 		--menu "$seclayout" 0 0 10 br "Brasil")
-	localectl set-keymap br
+	#localectl set-keymap br
+}
+
+fuzoneinfo () {
+
+	while (true)
+	do
+	dzoneinfo=$(dialog \
+		--stdout \
+		--cancel-label "$cancel" \
+		--ok-label "$ok" \
+		--title "$selzone" \
+		--menu "$seczone" \
+		0 0 10 \
+		$zonelist)
+	break
+	done
 }

@@ -19,3 +19,15 @@ sellayout="Layout de teclado"
 
 # Titulo do menu da escolha do teclado.
 seclayout="Escolha seu layout de teclado"
+
+# Titulo da tela de seleção de GMT
+selzone="Fuso horário"
+
+# Titulo do menu da escolha de Fuso horário
+seczone="Escolha o seu fuso horário"
+
+# Titulo da tela inícial do instalador
+msginstallarch="INSTALADOR DO ARCH LINUX BASE"
+
+# Texto da caixa de mensagem do instalador
+msginstall="Bem-vindo ao instalador do Arch Linux Base!"
